@@ -1,4 +1,3 @@
-
 --
 -- PostgreSQL database dump
 --
@@ -128,7 +127,7 @@ CREATE TABLE public.planet (
     name character varying(20) NOT NULL,
     radius_km integer NOT NULL,
     mass_kg text,
-    gravity numeric(3,2) NOT NULL,
+    gravity_ms2 numeric(4,2) NOT NULL,
     presenceofatm boolean,
     star_id integer
 );
@@ -165,8 +164,8 @@ ALTER SEQUENCE public.planet_planet_id_seq OWNED BY public.planet.planet_id;
 CREATE TABLE public.star (
     star_id integer NOT NULL,
     name character varying(20) NOT NULL,
-    distance_ly integer NOT NULL,
-    constellation text,    
+    distance_ly integer,
+    constellation text,
     galaxy_id integer
 );
 
@@ -287,12 +286,28 @@ INSERT INTO public.galaxy VALUES (6, 'NGC 3031', 5000, 12000000, 250);
 -- Data for Name: planet; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.planet VALUES (1, 'Mercury', 2440, '3.28 x 10^23', 3.70, false, 7);
+INSERT INTO public.planet VALUES (2, 'Venus', 6052, '4.87 x 10^24', 8.87, true, 7);
+INSERT INTO public.planet VALUES (3, 'Earth', 6370, '5.97 x 10^24', 9.81, true, 7);
+INSERT INTO public.planet VALUES (4, 'Mars', 3389, '6.39 x 10^23', 3.72, true, 7);
+INSERT INTO public.planet VALUES (5, 'Jupiter', 69911, '1.90 x 10^27', 24.79, true, 7);
+INSERT INTO public.planet VALUES (6, 'Saturn', 58232, '5.68 x 10^26', 10.44, true, 7);
+INSERT INTO public.planet VALUES (7, 'Uranus', 25362, '8.68 x 10^25', 8.87, true, 7);
+INSERT INTO public.planet VALUES (8, 'Neptune', 24622, '1.02 x 10^26', 11.15, true, 7);
 
 
 --
 -- Data for Name: star; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.star VALUES (1, 'Alpheratz', 97, 'Andromeda', 1);
+INSERT INTO public.star VALUES (2, 'Mirach', 199, 'Andromeda', 1);
+INSERT INTO public.star VALUES (3, 'Almaak', 350, 'Andromeda', 1);
+INSERT INTO public.star VALUES (4, 'Achernar', 144, 'Eridanus', 1);
+INSERT INTO public.star VALUES (5, 'Acrux', 325, 'Crux', 1);
+INSERT INTO public.star VALUES (6, 'Canopus', 310, 'Carina', 1);
+INSERT INTO public.star VALUES (7, 'Sun', NULL, NULL, 1);
+INSERT INTO public.star VALUES (8, 'Betelgeuse', 643, 'Orion', 1);
 
 
 --
@@ -319,14 +334,14 @@ SELECT pg_catalog.setval('public.moon_moon_id_seq', 1, false);
 -- Name: planet_planet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.planet_planet_id_seq', 1, false);
+SELECT pg_catalog.setval('public.planet_planet_id_seq', 8, true);
 
 
 --
 -- Name: star_star_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.star_star_id_seq', 1, false);
+SELECT pg_catalog.setval('public.star_star_id_seq', 8, true);
 
 
 --
@@ -443,3 +458,4 @@ ALTER TABLE ONLY public.star
 --
 -- PostgreSQL database dump complete
 --
+
