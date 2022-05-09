@@ -89,7 +89,7 @@ CREATE TABLE public.moon (
     name character varying(20) NOT NULL,
     mass_kg text,
     radius_km integer NOT NULL,
-    gravity numeric(3,2) NOT NULL,
+    gravity_ms2 numeric(3,2) NOT NULL,
     planet_id integer
 );
 
@@ -281,6 +281,26 @@ INSERT INTO public.galaxy VALUES (6, 'NGC 3031', 5000, 12000000, 250);
 -- Data for Name: moon; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.moon VALUES (1, 'Moon', '7.35 x 10^22', 1737, 1.62, 3);
+INSERT INTO public.moon VALUES (2, 'Phobos', '1.07 x 10^16', 11, 0.01, 4);
+INSERT INTO public.moon VALUES (3, 'Deimos', '2.24 x 10^15', 6, 0.01, 4);
+INSERT INTO public.moon VALUES (4, 'Europa', '4.80 x 10^22', 1561, 1.31, 5);
+INSERT INTO public.moon VALUES (5, 'Ganymede', '1.48 x 10^23', 2634, 1.42, 5);
+INSERT INTO public.moon VALUES (6, 'Io', '8.94 x 10^22', 1822, 1.81, 5);
+INSERT INTO public.moon VALUES (7, 'Callisto', '1.08 x 10^23', 2410, 1.24, 5);
+INSERT INTO public.moon VALUES (8, 'Titan', '1.35 x 10^23', 2574, 1.37, 6);
+INSERT INTO public.moon VALUES (9, 'Enceladus', '1.08 x 10^20', 252, 0.11, 6);
+INSERT INTO public.moon VALUES (10, 'Mimas', '3.75 x 10^19', 198, 0.08, 6);
+INSERT INTO public.moon VALUES (11, 'Iapetus', '1.81 x 10^21', 735, 0.26, 6);
+INSERT INTO public.moon VALUES (12, 'Dione', '1.10 x 10^21', 562, 0.23, 6);
+INSERT INTO public.moon VALUES (13, 'Rhea', '2.32 x 10^21', 764, 0.27, 6);
+INSERT INTO public.moon VALUES (14, 'Hyperion', '5.69 x 10^18', 135, 0.04, 6);
+INSERT INTO public.moon VALUES (15, 'Titania', '3.53 x 10^21', 789, 0.38, 7);
+INSERT INTO public.moon VALUES (16, 'Umbriel', '11.72 x 10^20', 585, 0.23, 7);
+INSERT INTO public.moon VALUES (17, 'Oberon', '3.01 x 10^21', 761, 0.35, 7);
+INSERT INTO public.moon VALUES (18, 'Triton', '2.14 x 10^22', 1353, 0.78, 8);
+INSERT INTO public.moon VALUES (19, 'Nereid', '3.10 x 10^19', 170, 0.07, 8);
+INSERT INTO public.moon VALUES (20, 'Caronte', '1.52 x 10^21', 604, 0.29, 11);
 
 
 --
@@ -340,7 +360,7 @@ SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 6, true);
 -- Name: moon_moon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.moon_moon_id_seq', 1, false);
+SELECT pg_catalog.setval('public.moon_moon_id_seq', 20, true);
 
 
 --
