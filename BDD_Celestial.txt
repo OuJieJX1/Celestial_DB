@@ -127,7 +127,7 @@ CREATE TABLE public.planet (
     name character varying(20) NOT NULL,
     radius_km integer NOT NULL,
     mass_kg text,
-    gravity_ms2 numeric(4,2) NOT NULL,
+    gravity_ms2 numeric(4,2),
     presenceofatm boolean,
     star_id integer
 );
@@ -166,7 +166,8 @@ CREATE TABLE public.star (
     name character varying(20) NOT NULL,
     distance_ly integer,
     constellation text,
-    galaxy_id integer
+    galaxy_id integer,
+    stars_size_id integer
 );
 
 
@@ -294,33 +295,45 @@ INSERT INTO public.planet VALUES (5, 'Jupiter', 69911, '1.90 x 10^27', 24.79, tr
 INSERT INTO public.planet VALUES (6, 'Saturn', 58232, '5.68 x 10^26', 10.44, true, 7);
 INSERT INTO public.planet VALUES (7, 'Uranus', 25362, '8.68 x 10^25', 8.87, true, 7);
 INSERT INTO public.planet VALUES (8, 'Neptune', 24622, '1.02 x 10^26', 11.15, true, 7);
+INSERT INTO public.planet VALUES (9, 'Pathie', 39000, '6 x 10^25', NULL, NULL, 7);
+INSERT INTO public.planet VALUES (10, 'Sedna', 1500, '1 x 10^21', 0.27, NULL, 7);
+INSERT INTO public.planet VALUES (11, 'Pluto', 1185, '1 .25 x 10^22', 0.60, true, 7);
+INSERT INTO public.planet VALUES (12, 'Ceres', 473, '9.43 x 10^20', 0.28, true, 7);
 
 
 --
 -- Data for Name: star; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.star VALUES (1, 'Alpheratz', 97, 'Andromeda', 1);
-INSERT INTO public.star VALUES (2, 'Mirach', 199, 'Andromeda', 1);
-INSERT INTO public.star VALUES (3, 'Almaak', 350, 'Andromeda', 1);
-INSERT INTO public.star VALUES (4, 'Achernar', 144, 'Eridanus', 1);
-INSERT INTO public.star VALUES (5, 'Acrux', 325, 'Crux', 1);
-INSERT INTO public.star VALUES (6, 'Canopus', 310, 'Carina', 1);
-INSERT INTO public.star VALUES (7, 'Sun', NULL, NULL, 1);
-INSERT INTO public.star VALUES (8, 'Betelgeuse', 643, 'Orion', 1);
+INSERT INTO public.star VALUES (1, 'Alpheratz', 97, 'Andromeda', 1, NULL);
+INSERT INTO public.star VALUES (2, 'Mirach', 199, 'Andromeda', 1, NULL);
+INSERT INTO public.star VALUES (3, 'Almaak', 350, 'Andromeda', 1, NULL);
+INSERT INTO public.star VALUES (4, 'Achernar', 144, 'Eridanus', 1, NULL);
+INSERT INTO public.star VALUES (5, 'Acrux', 325, 'Crux', 1, NULL);
+INSERT INTO public.star VALUES (6, 'Canopus', 310, 'Carina', 1, NULL);
+INSERT INTO public.star VALUES (7, 'Sun', NULL, NULL, 1, NULL);
+INSERT INTO public.star VALUES (8, 'Betelgeuse', 643, 'Orion', 1, NULL);
 
 
 --
 -- Data for Name: stars_size; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.stars_size VALUES (1, 'Hypergiants', true);
+INSERT INTO public.stars_size VALUES (2, 'Supergiants', true);
+INSERT INTO public.stars_size VALUES (3, 'Bright giants', true);
+INSERT INTO public.stars_size VALUES (4, 'Giants', true);
+INSERT INTO public.stars_size VALUES (5, 'Subgiants', true);
+INSERT INTO public.stars_size VALUES (6, 'Dwarfs', NULL);
+INSERT INTO public.stars_size VALUES (7, 'Subdwarfs', false);
+INSERT INTO public.stars_size VALUES (8, 'White dwarfs', false);
 
 
 --
 -- Name: galaxy_galaxy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 7, true);
+SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 6, true);
 
 
 --
@@ -334,7 +347,7 @@ SELECT pg_catalog.setval('public.moon_moon_id_seq', 1, false);
 -- Name: planet_planet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.planet_planet_id_seq', 8, true);
+SELECT pg_catalog.setval('public.planet_planet_id_seq', 12, true);
 
 
 --
@@ -348,7 +361,7 @@ SELECT pg_catalog.setval('public.star_star_id_seq', 8, true);
 -- Name: stars_size_stars_size_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.stars_size_stars_size_id_seq', 1, false);
+SELECT pg_catalog.setval('public.stars_size_stars_size_id_seq', 8, true);
 
 
 --
@@ -453,6 +466,14 @@ ALTER TABLE ONLY public.planet
 
 ALTER TABLE ONLY public.star
     ADD CONSTRAINT star_galaxy_id_fkey FOREIGN KEY (galaxy_id) REFERENCES public.galaxy(galaxy_id);
+
+
+--
+-- Name: star star_stars_size_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.star
+    ADD CONSTRAINT star_stars_size_id_fkey FOREIGN KEY (stars_size_id) REFERENCES public.stars_size(stars_size_id);
 
 
 --
